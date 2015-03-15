@@ -1,0 +1,62 @@
+create table Henkilo (                       		  -- palveluun kirjautunut käyttäjä  
+   henkiloID varchar(12) not null primary key,  	  -- henkilön yksilöivä tunnus 
+   sahkoposti varchar(32) not null,                   -- email
+   opiskelijanumero numeric(9) not null,              -- henkilön HY:n opiskelijanumero
+   profiili varchar(12)                               -- henkilön profiilitunnus
+);
+
+create table Profiili (								  -- henkilön profiili
+   henkiloID varchar(12) not null,				  	  -- henkilön yksilöivä tunnus 
+   kayttajatunnus varchar(12) not null primary key    -- henkilön nimike palvelussa
+);
+
+create table Perustiedot (							  -- tietoja henkilöstä
+	perustietoID varchar(12) not null primary key,    -- yksilöi perustiedot
+	kayttajatunnus varchar(12) not null,              -- henkilön nimike palvelussa
+	ika numeric(3),									  -- henkilön ikä
+	paaAine varchar(20),							  -- henkilön pääaine
+	sukupuoli char not null 						  -- henkilön sukupuoli (M/N)
+);
+
+create table Lisatiedot (							  -- lisätietoja henkilöstä
+	lisatietoID varchar(12) not null primary key,	  -- yksilöi lisätiedot
+	kayttajatunnus varchar(12) not null,              -- henkilön nimike palvelussa
+	valokuva varchar(128), 							  -- kuva
+	kielet varchar(128),							  -- osatut kielet
+	vaihtari char,									  -- onko vaihtari (Y/N)
+	haettavaSeura varchar(128), 					  -- haettava seura (mies, nainen, muu...)
+	romanttinen char,								  -- (Y/N)
+	tositarkoituksella char,						  -- (Y/N)
+	kuvaus varchar(1000),							  -- vapaamuotoinen kuvaus itsestä
+	kyselyID varchar(12) not null,					  -- viite kyselyyn
+	mielialaemoji varchar(128)						  -- emoji
+);
+
+create table Kysely (								  -- parinmuodostusta edesauttava kysely
+	lisatietoID varchar(12) not null,	  			  -- yksilöi lisätiedot
+	kyselyID varchar(12) not null primary key,		  -- viite kyselyyn
+	vastaukset varchar(1000)						  -- kyselyn vastaukset
+);
+
+create table Keskustelu (							  -- yksittäisen keskustelun loki
+	keskusteluID varchar(128) not null primary key,   -- keskustelun yksilöivä tunnus
+    henkiloID varchar(12) not null,				  	  -- henkilön yksilöivä tunnus 
+	viestiID varchar(128)   						  -- viestin yksilöivä tunnus
+);
+
+create table Viesti (								  -- yksittäinen viesti keskustelussa
+	viestiID varchar(128) not null primary key,   	  -- viestin yksilöivä tunnus
+    henkiloID varchar(12) not null,				  	  -- henkilön yksilöivä tunnus 
+	aikaleima date not null primary key,			  -- viestin lähetysaika
+	viestisisältö varchar(1000) not null 			  -- viestin sisältö
+);
+
+create table Deitti (								  -- tapaaminen
+	aika date not null primary key,					  -- tapaamisaika
+	paikka varchar(128) not null,					  -- tapaamispaikka
+	rate numeric(10), 								  -- deitin arvostelu
+    henkiloID varchar(12) not null,				  	  -- henkilön yksilöivä tunnus 
+	hyvaksytty char									  -- (Y/N)
+);
+
+
