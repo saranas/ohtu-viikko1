@@ -59,4 +59,6 @@ create table Deitti (								  -- tapaaminen
 	hyvaksytty char									  -- (Y/N)
 );
 
+muokattu :DDD
+
 
