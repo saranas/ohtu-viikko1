@@ -13,7 +13,7 @@ public class Tuomari {
         this.tasapelit = 0;
     }
 
-    public void kirjaaSiirto(String ekanSiirto, String tokanSiirto) {
+    public void kirjaaTulos(String ekanSiirto, String tokanSiirto) {
         if (tasapeli(ekanSiirto, tokanSiirto)) {
             tasapelit++;
         } else if (ekaVoittaa(ekanSiirto, tokanSiirto)) {
